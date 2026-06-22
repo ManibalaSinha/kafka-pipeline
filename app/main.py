@@ -1,12 +1,17 @@
-from fastapi import FastAPI
-
-from app.api.routes import router
-
+from fastapi import APIRouter, FastAPI, Response
+from app.core.middleware import metrics_middleware
 from app.database.db import Base, engine
+from app.monitoring.metrics import metrics_endpoint
+from app.api.routes.student import router
 
 app = FastAPI(title="Enterprise Data Pipeline", version="1.0.0")
+router = APIRouter()
+app.include_router(router, prefix="/api/v1")
+app.middleware("http")(metrics_middleware)
 
-app.include_router(router)
+@app.get("/metrics")
+def metrics():
+    return Response(metrics_endpoint(), media_type="text/plain")
 
 @app.on_event("startup")
 def startup():

@@ -1,22 +1,32 @@
-from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
-BASE_DIR = Path(__file__).resolve().parent.parent.parent  # adjust if needed
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    APP_NAME: str
-    DATABASE_URL: str
-    SECRET_KEY: str
-    ALGORITHM: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    app_name: str
 
-    KAFKA_BOOTSTRAP_SERVER: str
+    postgres_db: str
+    postgres_user: str
+    postgres_password: str
+    postgres_host: str
+    postgres_port: int
 
-    REDIS_HOST: str
-    REDIS_PORT: int
-   
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        extra="ignore"
-    )
+    secret_key: str
+    algorithm: str
+    access_token_expire_minutes: int
+
+    kafka_bootstrap_server: str
+    redis_host: str
+    redis_port: int
+
+    @property
+    def DATABASE_URL(self) -> str:
+        return (
+            f"postgresql://{self.postgres_user}:"
+            f"{self.postgres_password}@"
+            f"{self.postgres_host}:"
+            f"{self.postgres_port}/"
+            f"{self.postgres_db}"
+        )
+
 settings = Settings()

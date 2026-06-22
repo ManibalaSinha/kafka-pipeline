@@ -2,7 +2,6 @@ from sqlalchemy import Column, String, DateTime, JSON
 
 from app.database.db import Base
 
-
 class JobTable(Base):
     __tablename__ = "jobs"
 

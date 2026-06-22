@@ -1,3 +1,5 @@
+from app.database.crud import JobRepository
+
 class JobService:
 
     def __init__(self, db):

@@ -3,7 +3,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-class JobCreate(BaseModel):
+class StudentCreate(BaseModel):
     job_id: str
     user_id: str
     event_type: str
@@ -11,8 +11,8 @@ class JobCreate(BaseModel):
     payload: dict[str, Any]
     timestamp: datetime
 
-class JobUpdate(BaseModel):
+class StudentUpdate(BaseModel):
     status: str
 
-class JobResponse(JobCreate):
+class StudentResponse(StudentCreate):
     pass
