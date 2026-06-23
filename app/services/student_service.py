@@ -1,19 +1,18 @@
 from app.producers.kafka_producer import KafkaMessageProducer
 
-producer = KafkaMessageProducer()
-
 
 class StudentService:
+    def __init__(self):
+        self.producer = KafkaMessageProducer()
 
     def create_student(self, db, student_data):
-
         student_dict = {
             "name": student_data.name,
             "email": student_data.email,
-            "age": student_data.age
+            "age": student_data.age,
         }
 
-        # Send event to Kafka instead of direct DB write
-        producer.send("student_created", student_dict)
+        # Send event to Kafka
+        self.producer.send("student_created", student_dict)
 
         return student_dict

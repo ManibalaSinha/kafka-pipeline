@@ -2,7 +2,7 @@ from fastapi import APIRouter, FastAPI, Response
 from app.core.middleware import metrics_middleware
 from app.database.db import Base, engine
 from app.monitoring.metrics import metrics_endpoint
-from app.api.routes.student import router
+from app.api.routes import router
 
 app = FastAPI(title="Enterprise Data Pipeline", version="1.0.0")
 router = APIRouter()
@@ -18,7 +18,5 @@ def startup():
     Base.metadata.create_all(bind=engine)
 
 @app.get("/")
-
 def home():
-
     return {"message": "Enterprise Data Pipeline Running"}

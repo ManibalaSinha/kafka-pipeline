@@ -7,7 +7,7 @@ from app.core.response import success_response, error_response
 router = APIRouter()
 
 student_service = StudentService()
-@router.post("/students")
+@router.post("/")
 def create_student(student: StudentCreate, db: Session = Depends(get_db)):
     created = student_service.create_student(db, student)
 
@@ -16,7 +16,7 @@ def create_student(student: StudentCreate, db: Session = Depends(get_db)):
         message="Student created",
         status_code=201
     )
-@router.get("/students/{id}")
+@router.get("/{id}")
 def get_student(id: int, db: Session = Depends(get_db)):
     student = student_service.get_student(db, id)
 
@@ -30,7 +30,7 @@ def get_student(id: int, db: Session = Depends(get_db)):
         data=student,
         message="Student fetched successfully"
     )
-@router.delete("/students/{id}")
+@router.delete("/{id}")
 def delete_student(id: int, db: Session = Depends(get_db)):
     student_service.delete_student(db, id)
 

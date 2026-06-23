@@ -26,6 +26,7 @@ class Settings(BaseSettings):
             f"{self.postgres_password}@"
             f"{self.postgres_host}:"
             f"{self.postgres_port}/"
+            
             f"{self.postgres_db}"
         )
 
