@@ -1,17 +1,18 @@
-from fastapi import APIRouter, FastAPI, Response
+from fastapi import FastAPI, Response
 from app.core.middleware import metrics_middleware
 from app.database.db import Base, engine
 from app.monitoring.metrics import metrics_endpoint
-from app.api.routes import router
+
+from app.routers.student_router import router as student_router
+from app.routers.metrics_router import router as metrics_router
 
 app = FastAPI(title="Enterprise Data Pipeline", version="1.0.0")
-router = APIRouter()
-app.include_router(router, prefix="/api/v1")
-app.middleware("http")(metrics_middleware)
 
-@app.get("/metrics")
-def metrics():
-    return Response(metrics_endpoint(), media_type="text/plain")
+# include real routers
+app.include_router(student_router, prefix="/api/v1/students", tags=["Students"])
+app.include_router(metrics_router, prefix="/metrics", tags=["Metrics"])
+
+app.middleware("http")(metrics_middleware)
 
 @app.on_event("startup")
 def startup():
@@ -19,4 +20,4 @@ def startup():
 
 @app.get("/")
 def home():
-    return {"message": "Enterprise Data Pipeline Running"}
+    return {"message": "KAFKA Data Pipeline Running"}

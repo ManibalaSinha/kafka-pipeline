@@ -1,15 +1,12 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 class StudentCreate(BaseModel):
-    job_id: str
-    user_id: str
-    event_type: str
-    status: str
-    payload: dict[str, Any]
-    timestamp: datetime
+    name: str
+    email: EmailStr
+    age: int
 
 class StudentUpdate(BaseModel):
     status: str
