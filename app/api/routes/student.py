@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.database.db import get_db
 from app.schemas.student import StudentCreate
 from app.services.student_service import StudentService
-from app.core.response import success_response, error_response
+from app.utils.response import success_response, error_response
 router = APIRouter()
 
 student_service = StudentService()

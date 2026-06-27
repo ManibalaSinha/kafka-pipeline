@@ -2,7 +2,7 @@ import json
 
 from kafka import KafkaProducer
 from app.config.settings import settings
-from app.core.logger import logger
+from app.utils.logger import logger
 
 
 class KafkaMessageProducer:

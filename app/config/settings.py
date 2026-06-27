@@ -16,8 +16,11 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int
 
     kafka_bootstrap_server: str
+
     redis_host: str
     redis_port: int
+
+    max_retries: int = 3  
 
     @property
     def DATABASE_URL(self) -> str:

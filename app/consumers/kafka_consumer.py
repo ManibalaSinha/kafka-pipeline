@@ -5,7 +5,6 @@ from app.core.logger import logger
 from app.db.session import SessionLocal
 from app.models.student import Student
 
-
 class KafkaMessageConsumer:
     def __init__(self, topic: str):
         self.consumer = KafkaConsumer(

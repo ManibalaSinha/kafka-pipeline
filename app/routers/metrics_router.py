@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Response
-from app.metrics.prometheus_metrics import metrics_output
+from app.metrics.prometheus import metrics_output
 
 router = APIRouter()
 

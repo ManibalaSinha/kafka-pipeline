@@ -1,7 +1,6 @@
 from typing import Any, Optional
 from fastapi.responses import JSONResponse
 
-
 def success_response(
     data: Any = None,
     message: str = "Success",
@@ -15,7 +14,6 @@ def success_response(
             "data": data
         }
     )
-
 
 def error_response(
     message: str = "Error",
