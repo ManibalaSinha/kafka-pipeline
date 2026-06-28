@@ -1,6 +1,6 @@
 from jose import jwt
-
-os.get.SECRET_KEY
+import os
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 ALGORITHM = "HS256"
 
