@@ -7,7 +7,6 @@ import requests
 
 FASTAPI_URL = "http://fastapi:8000"
 
-
 def create_student():
 
     student = {
@@ -23,7 +22,6 @@ def create_student():
 
     print(response.json())
 
-
 def get_students():
 
     response = requests.get(
@@ -36,7 +34,6 @@ def get_students():
 default_args = {
     "owner": "airflow",
 }
-
 
 with DAG(
 
