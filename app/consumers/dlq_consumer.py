@@ -1,29 +1,23 @@
 import json
 from kafka import KafkaConsumer
+from app.utils.logger import get_logger
 from app.config.settings import settings
-from app.utils.logger import logger
 
-DLQ_TOPIC = "student_dlq"
 
-def start_dlq_consumer() -> None:
-    """
-    Consume failed messages from the Dead Letter Queue (DLQ).
-    """
-    consumer = KafkaConsumer(
-        DLQ_TOPIC,
-        bootstrap_servers=settings.kafka_bootstrap_server,
-        value_deserializer=lambda v: json.loads(v.decode("utf-8")),
-        auto_offset_reset="earliest",
-        enable_auto_commit=True,
-        group_id="student-dlq-group",
-    )
+logger = get_logger(__name__)
 
-    logger.info("DLQ Consumer started...")
+consumer = KafkaConsumer(
+    "student_created_dlq",
+    bootstrap_servers=settings.KAFKA_BROKER,
+    value_deserializer=lambda x: json.loads(x.decode("utf-8")),
+    auto_offset_reset="earliest",
+    group_id="dlq-group",
+)
 
-    for record in consumer:
-        message = record.value
+logger.info("DLQ Consumer Started")
 
-        logger.error("DLQ Message: %s", message)
+for message in consumer:
+    logger.error(f" DEAD LETTER MESSAGE: {message.value}")
 
       
         

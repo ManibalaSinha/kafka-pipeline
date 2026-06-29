@@ -2,8 +2,8 @@ import json
 
 from kafka import KafkaProducer
 from app.config.settings import settings
-from app.utils.logger import logger
-
+from app.utils.logger import get_logger
+logger = get_logger(__name__)
 
 class KafkaMessageProducer:
     def __init__(self):

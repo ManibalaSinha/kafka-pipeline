@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     postgres_password: str
     postgres_host: str
     postgres_port: int
-
+    
     secret_key: str
     algorithm: str
     access_token_expire_minutes: int
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     redis_port: int
 
     max_retries: int = 3  
-
+   
     @property
     def DATABASE_URL(self) -> str:
         return (
