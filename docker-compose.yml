@@ -71,6 +71,20 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
+  airflow-init:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+
+  airflow-webserver:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+
+  airflow-scheduler:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
 
 volumes:
   postgres_data:

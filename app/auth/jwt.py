@@ -1,9 +1,12 @@
 from jose import jwt
 import os
+<<<<<<< HEAD
+=======
+
+>>>>>>> e928219 (auth)
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 ALGORITHM = "HS256"
-
 
 def create_token(username):
 
